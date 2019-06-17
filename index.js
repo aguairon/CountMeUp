@@ -7,5 +7,6 @@ const app = express()
 mongoose.connect('mongodb://localhost/bbc')
 
 app.use(bodyParser.json())
-app.use(routes)
-app.listen(8000, () => console.log('listening in port 8000'))
+app.use('/api', routes)
+app.use('/*', (req, res) => res.sendFile(`${__dirname}/public/index.html`))
+app.listen(4000, () => console.log('listening in port 4000'))
