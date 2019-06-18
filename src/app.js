@@ -12,7 +12,8 @@ class App extends React.Component {
       data: {
         email: '',
         candidate: ''
-      }
+      },
+      errors: {}
     }
     this.handleChange  = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -28,7 +29,7 @@ class App extends React.Component {
 
   handleChange({target: {name, value}}){
     const data = {...this.state.data, [name]: value }
-    this.setState({ data })
+    this.setState({ data , errors: {}})
   }
 
   postVote() {
@@ -51,7 +52,7 @@ class App extends React.Component {
           this.postVote()
         } else {
           // if not reset form and give error message
-          this.setState({errors: 'This email has already votes 3 times', data: {'candidate': '', 'email': ''}})
+          this.setState({errors: { valid: 'This email has already votes 3 times'}, data: {'candidate': '', 'email': ''}})
         }
       })
 
@@ -59,6 +60,15 @@ class App extends React.Component {
 
   render(){
     if(!this.state) return <h1>Loading...</h1>
+    const {data: {email, candidate},  errors} = this.state
+    let message
+    if (errors) {
+      console.log(errors)
+    //   errors.forEach(error => {
+    //     message = <p className="error">{error}</p>
+    //   })
+    }
+
     return(
       <section className="section">
         <div className="container">
@@ -70,9 +80,10 @@ class App extends React.Component {
                   type="text"
                   placeholder="Email address"
                   name="email"
-                  value={this.state.data.email }
+                  value={email }
                   onChange={this.handleChange}>
                 </input>
+                {errors && errors.email && <p className="error">{errors.email.message}</p>}
               </div>
             </div>
             <div className="field">
@@ -82,11 +93,13 @@ class App extends React.Component {
                   type="text"
                   placeholder="Candidate Number"
                   name="candidate"
-                  value={this.state.data.candidate}
+                  value={candidate}
                   onChange={this.handleChange}>
                 </input>
+                {errors && errors.candidate && <p className="error">{errors.candidate.message}</p>}
               </div>
             </div>
+            {errors && errors.valid && <p className="error">{errors.valid}</p>}
             <button  className='button is-primary'>Submit</button>
           </form>
         </div>
@@ -94,6 +107,7 @@ class App extends React.Component {
     )
   }
 }
+
 ReactDOM.render(
   <App />,
   document.getElementById('root')
