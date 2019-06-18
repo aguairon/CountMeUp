@@ -6,6 +6,14 @@ function indexRoute(req, res) {
     .then(votes => res.status(200).json(votes))
 }
 
+function searchRoute(req, res, next) {
+  Vote
+    .find()
+    .where('email').equals(req.params.search)
+    .then(projects => res.status(200).json(projects))
+    .catch(next)
+}
+
 function createRoute(req, res) {
   Vote
     //Add a new vote to database
@@ -26,5 +34,6 @@ function createRoute(req, res) {
 
 module.exports = {
   index: indexRoute,
-  create: createRoute
+  create: createRoute,
+  search: searchRoute
 }
