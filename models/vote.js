@@ -5,6 +5,11 @@ const validateEmail = function(email) {
   return re.test(email)
 }
 
+const validateCandidate = function(number) {
+  const re = /[1-5]/
+  return re.test(number)
+}
+
 const voteSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -17,7 +22,10 @@ const voteSchema = new mongoose.Schema({
   },
   candidate: {
     type: Number,
-    required: 'Candidate number is required'}
+    required: 'Candidate number is required',
+    //make sure user inputs a valid email address
+    validate: [validateCandidate, 'Please choose candidates 1 to 5']
+  }
 }, {
   timestamps: true
 })

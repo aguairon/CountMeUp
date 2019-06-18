@@ -12,7 +12,7 @@ function createRoute(req, res) {
     .create(req.body)
     //Return the new vote
     .then(vote => res.status(201).json(vote))
-    // Error handling when submitting an invalid email or no candidate
+    // Error handling when submitting an invalid email or candidate
     .catch(function(err) {
       if (err.name === 'ValidationError') {
         console.error('Error Validating!', err)
