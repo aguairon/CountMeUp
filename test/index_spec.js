@@ -1,12 +1,13 @@
 /* global api, describe, it, expect, beforeEach */
 
-const { voteData } = require('./mock_data')
+const voteData = require('./mock_data')
 const Vote = require('../models/vote')
+console.log(voteData)
 
 describe('GET /vote', () => {
   beforeEach(done => {
     Promise.all([
-      Vote.remove({})
+      Vote.deleteMany({})
     ])
       .then(() => Vote.create(voteData))
       .then(() => done())
