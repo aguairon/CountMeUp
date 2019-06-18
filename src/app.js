@@ -31,14 +31,30 @@ class App extends React.Component {
     this.setState({ data })
   }
 
-  handleSubmit(e) {
-    e.preventDefault()
-
+  postVote() {
     axios
       .post('/api/vote',
         this.state.data)
       .then(this.setState({data: {'candidate': '', 'email': ''}}))
       .catch(err => this.setState({ errors: err.response.data.errors }))
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
+
+    axios
+      //search the db for the email on the form
+      .get(`/api/vote/${this.state.data.email}`)
+      .then(res => {
+        //let this email vote again if it has less than 3 votes
+        if (res.data.length < 3) {
+          this.postVote()
+        } else {
+          // if not reset form and give error message
+          this.setState({errors: 'This email has already votes 3 times', data: {'candidate': '', 'email': ''}})
+        }
+      })
+
   }
 
   render(){
