@@ -61,13 +61,6 @@ class App extends React.Component {
   render(){
     if(!this.state) return <h1>Loading...</h1>
     const {data: {email, candidate},  errors} = this.state
-    let message
-    if (errors) {
-      console.log(errors)
-    //   errors.forEach(error => {
-    //     message = <p className="error">{error}</p>
-    //   })
-    }
 
     return(
       <section className="section">
