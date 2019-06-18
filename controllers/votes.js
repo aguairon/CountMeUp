@@ -6,15 +6,22 @@ function indexRoute(req, res) {
     .then(votes => res.status(200).json(votes))
 }
 
-function createRoute(req, res, next) {
-  //Add current user to the body
-  req.body.user = req.currentUser
+function createRoute(req, res) {
   Vote
-    //Add a new project to database
+    //Add a new vote to database
     .create(req.body)
-    //Return the new project
+    //Return the new vote
     .then(vote => res.status(201).json(vote))
-    .catch(next)
+    // Error handling when submitting an invalid email or no candidate
+    .catch(function(err) {
+      if (err.name === 'ValidationError') {
+        console.error('Error Validating!', err)
+        res.status(422).json(err)
+      } else {
+        console.error(err)
+        res.status(500).json(err)
+      }
+    })
 }
 
 module.exports = {
