@@ -20,6 +20,7 @@ class App extends React.Component {
   }
 
   componentDidMount(){
+    //get all the votes in existance
     axios.get('/api/vote/')
       .then( res =>{
         this.setState({ vote: res.data})
@@ -29,6 +30,7 @@ class App extends React.Component {
 
   handleChange({target: {name, value}}){
     const data = {...this.state.data, [name]: value }
+    // reset the errors so when user types it does not see no longer relevant error code
     this.setState({ data , errors: {}})
   }
 
@@ -60,7 +62,8 @@ class App extends React.Component {
 
   render(){
     if(!this.state) return <h1>Loading...</h1>
-    const {data: {email, candidate},  errors} = this.state
+    // extracting all the variables to make it more readable
+    const {data: {email, candidate},  errors: {email: errEmail, candidate: errCandidate, valid}} = this.state
 
     return(
       <section className="section">
@@ -76,7 +79,7 @@ class App extends React.Component {
                   value={email }
                   onChange={this.handleChange}>
                 </input>
-                {errors && errors.email && <p className="error">{errors.email.message}</p>}
+                {errEmail && <p className="error">{errEmail.message}</p>}
               </div>
             </div>
             <div className="field">
@@ -89,10 +92,10 @@ class App extends React.Component {
                   value={candidate}
                   onChange={this.handleChange}>
                 </input>
-                {errors && errors.candidate && <p className="error">{errors.candidate.message}</p>}
+                {errCandidate && <p className="error">{errCandidate.message}</p>}
               </div>
             </div>
-            {errors && errors.valid && <p className="error">{errors.valid}</p>}
+            {valid && <p className="error">{valid}</p>}
             <button  className='button is-primary'>Submit</button>
           </form>
         </div>
