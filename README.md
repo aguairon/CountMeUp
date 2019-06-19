@@ -23,5 +23,3 @@ I decided to create the form component next. In order to give adecuate feedback 
 When the form was working and displaying the correct error messages I moved onto how to deal with not being able to vote more than 3 times. The solution I decided on was to once there was 3 votes linked to one email address to not let another vote be created. So I set up the search route and before sending the create request for the vote the frontend checks how many votes the email used has already. If that email has already 3 an error message is displayed in the form.
 
 
-
-
