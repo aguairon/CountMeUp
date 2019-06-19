@@ -6,4 +6,8 @@
 * Git / GitHub
 * MongoDB & Mongoose
 * Chai/Mocha/Supertest
-* request-promise/axio
+* request-promise/axios
+
+
+## Run the application 
+The application uses yarn.In order to run the application run `yarn install`
