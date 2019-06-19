@@ -2,7 +2,12 @@ const Vote = require('../models/vote')
 
 function indexRoute(req, res) {
   Vote
-    .find()
+    .aggregate(
+      [
+        { $group: {_id: '$candidate', total: {$sum: 1}}},
+        { $sort: { _id: 1 } }
+      ]
+    )
     .then(votes => res.status(200).json(votes))
 }
 

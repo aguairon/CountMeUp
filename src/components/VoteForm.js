@@ -47,6 +47,7 @@ class VoteForm extends React.Component {
   }
 
   render() {
+    // extracting all the variables to make it more readable
     const {data: {email, candidate},  errors: {email: errEmail, candidate: errCandidate, valid}} = this.state
     return(
       <section className="section">

@@ -13,7 +13,6 @@ class App extends React.Component {
     this.state = {
 
     }
-
   }
 
   componentDidMount(){
@@ -23,14 +22,16 @@ class App extends React.Component {
         this.setState({ vote: res.data})
       })
       .catch(err =>this.setState({error: err.message}))
+
   }
 
   render(){
-    if(!this.state) return <h1>Loading...</h1>
-    // extracting all the variables to make it more readable
-
+    if(!this.state.vote) return <h1>Loading...</h1>
     return(
-      <VoteForm />
+      <main>
+        <h1 className="title is-1">Count Me Up</h1>
+        <VoteForm />
+      </main>
     )
   }
 }
