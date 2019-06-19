@@ -22,7 +22,6 @@ class Graph extends React.Component {
     let count = 0
     this.state.vote.forEach(v => {
       if (v._id === i + 1) {
-        console.log('yes', v.total, v._id, i + 1)
         count = v.total
       }
     })
@@ -48,7 +47,7 @@ class Graph extends React.Component {
   }
 
   render() {
-    if(!this.state.vote) return <h1>Loading...</h1>
+    if(!this.state.vote) return <h1>No votes yet...</h1>
     return(
       <div>
         <h3 className="title is-3">Candidates votes so far</h3>

@@ -10,7 +10,6 @@ import Graph from './components/Graph'
 class App extends React.Component {
 
   render(){
-
     return(
       <main>
         <h1 className="title is-1">Count Me Up</h1>

@@ -26,8 +26,8 @@ describe('GET /vote', () => {
         expect(res.body).to.be.an('array')
         res.body.forEach(_vote => {
           expect(_vote).to.include.keys([
-            'email',
-            'candidate'
+            '_id',
+            'total'
           ])
         })
         done()
@@ -39,8 +39,8 @@ describe('GET /vote', () => {
       .get('/api/vote')
       .end((err, res) => {
         res.body.forEach((_vote, i) => {
-          expect(_vote.email).to.eq(voteData[i].email)
-          expect(_vote.candidate).to.eq(voteData[i].candidate)
+          expect(_vote._id).to.eq(voteData[i].candidate)
+          expect(_vote.total).to.eq(1)
         })
         done()
       })
