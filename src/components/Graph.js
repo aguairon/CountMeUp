@@ -10,7 +10,7 @@ class Graph extends React.Component {
   }
 
   componentDidMount(){
-    //get all the votes in existance
+    //get totals for candidates
     axios.get('/api/vote/')
       .then( res =>{
         this.setState({ vote: res.data})
@@ -20,6 +20,7 @@ class Graph extends React.Component {
 
   getCorrectCount(i) {
     let count = 0
+    //instead of returning 0, if there is a total for that candidate return that
     this.state.vote.forEach(v => {
       if (v._id === i + 1) {
         count = v.total
@@ -28,7 +29,7 @@ class Graph extends React.Component {
 
     return count
   }
-
+  // create 5 sections of columns with a candidate column and a count column
   createColumns() {
     const columns = []
     for(let i = 0; i < 5; i++) {
