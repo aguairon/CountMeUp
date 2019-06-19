@@ -50,11 +50,14 @@ class Graph extends React.Component {
   render() {
     if(!this.state.vote) return <h1>Loading...</h1>
     return(
-      <section className="section">
-        <div className="container">
-          {this.createColumns()}
-        </div>
-      </section>
+      <div>
+        <h3 className="title is-3">Candidates votes so far</h3>
+        <section className="section graph">
+          <div className="container">
+            {this.createColumns()}
+          </div>
+        </section>
+      </div>
     )
   }
 }

@@ -52,6 +52,7 @@ class VoteForm extends React.Component {
     return(
       <section className="section">
         <div className="container">
+          <h2 className="title is-2">Vote for one of the 5 candidates...</h2>
           <form onSubmit={this.handleSubmit}>
             <div className="field">
               <div className="control">
