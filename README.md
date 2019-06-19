@@ -11,7 +11,7 @@
 
 
 ## Run the application 
-The application uses yarn. In order to install all the dependencies for this application run `yarn install`. To seed the database run `yarn run seed`.
+The application uses yarn. In order to install all the dependencies for this application run `yarn install`. To seed the database run `yarn run seed`. `yarn run serve` to start the `webpack-dev-server` and `nodemon` to start the server.
 
 ## The Application
 Once I bootstrapped the application I built the models, controllers and routes that were to be the backbone. Ideally I would have built a registration route and linked the votes to an account but as it is a simple project I decided to just store the candidate number and an email address. 
